@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_one_auction/Components/auction_page.dart';
 import 'package:gallery_one_auction/Components/login_page.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:image_cropper/image_cropper.dart';
+// import 'package:image_picker/image_picker.dart';
+// import 'package:image_cropper/image_cropper.dart';
 import 'dart:io';
 
 class Signup extends StatefulWidget {
@@ -107,7 +107,7 @@ class _SignupState extends State<Signup> {
       Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          //mainAxisSize: MainAxisSize.min,
           children: [
             const CircleAvatar(
               radius: 75.0,
