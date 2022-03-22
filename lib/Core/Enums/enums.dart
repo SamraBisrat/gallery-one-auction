@@ -1,0 +1,1 @@
+enum UploadTo { profiles, auction }
