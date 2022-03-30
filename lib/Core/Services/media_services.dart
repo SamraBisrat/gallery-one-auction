@@ -10,35 +10,31 @@ import 'package:image_picker/image_picker.dart';
 import 'package:gallery_one_auction/Core/Enums/enums.dart';
 import 'package:path/path.dart' as path;
 
-
-
-
 class MediaServices extends GetxService {
-  final FirebaseStorage storageInstance;
-  File? _image;
-    final _picker = ImagePicker();
+  late final FirebaseStorage storageInstance;
+  final _picker = ImagePicker();
 
-  MediaServices({required this.storageInstance})
+  // MediaServices({required this.storageInstance})
 
   // Implementing the image picker
-  Future<File>_openImagePicker(ImageSource imageSource, String mediaType) async {
+  Future<File> openImagePicker(
+      ImageSource imageSource, String mediaType) async {
     try {
-      final pickedFile = await (mediaType == 'image' ? _picker.pickImage(source: imageSource) : _picker.pickVideo(source: imageSource));
-      if(pickedFile!=null){
+      final pickedFile = await (mediaType == 'image'
+          ? _picker.pickImage(source: imageSource)
+          : _picker.pickVideo(source: imageSource));
+      if (pickedFile != null) {
         return File(pickedFile.path);
-
-      }else return Future.error("Media is not selected");
-
-    
-      
+      } else {
+        return Future.error("Media is not selected");
+      }
     } on Exception catch (e) {
       print(e.toString());
       return Future.error(e.toString());
-
     }
   }
 
-    Future<File?> getCroppedImage(File imageFile) async {
+  Future<File?> getCroppedImage(File imageFile) async {
     try {
       return await ImageCropper().cropImage(
           sourcePath: imageFile.path,
@@ -62,30 +58,25 @@ class MediaServices extends GetxService {
       print(e.toString());
       return Future.error(e.toString());
     }
-  } 
-
-  Future<String> uploadFile(File _image, UploadTo uploadTo)async{
-    try {
-      Reference storageReference = storageInstance.ref().child('${describeEnum(uploadTo)}/${path.basename(_image.path)}');
-            UploadTask uploadTask = storageReference.putFile(_image);
-
-      await uploadTask.whenComplete(() => null);
-            print('File Uploaded');
-                  String returnURL = '';
-  await storageReference.getDownloadURL().then((fileURL) {
-        returnURL = fileURL;
-
-      });
-                    return returnURL;
-
-
-    } catch (e) {
-       print(e.toString());
-      return Future.error(e.toString());
-    }
-
   }
 
-  
-  
+  Future<String> uploadFile(File _image, UploadTo uploadTo) async {
+    try {
+      Reference storageReference = storageInstance
+          .ref()
+          .child('${describeEnum(uploadTo)}/${path.basename(_image.path)}');
+      UploadTask uploadTask = storageReference.putFile(_image);
+
+      await uploadTask.whenComplete(() => null);
+      print('File Uploaded');
+      String returnURL = '';
+      await storageReference.getDownloadURL().then((fileURL) {
+        returnURL = fileURL;
+      });
+      return returnURL;
+    } catch (e) {
+      print(e.toString());
+      return Future.error(e.toString());
+    }
+  }
 }

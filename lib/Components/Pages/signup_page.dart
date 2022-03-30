@@ -2,42 +2,24 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:gallery_one_auction/Components/auction_page.dart';
-import 'package:gallery_one_auction/Components/login_page.dart';
+import 'package:gallery_one_auction/Components/Pages/auction_page.dart';
+import 'package:gallery_one_auction/Components/Pages/login_page.dart';
 import 'dart:io';
 
 import 'package:gallery_one_auction/Theme/app_theme.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:image_picker/image_picker.dart';
 
-class Signup extends StatefulWidget {
+class Signup extends GetView {
   const Signup({Key? key}) : super(key: key);
 
   @override
-  _SignupState createState() => _SignupState();
-}
-
-class _SignupState extends State<Signup> {
-  File? _image;
-
-  final _picker = ImagePicker();
-  // Implementing the image picker
-  Future<void> _openImagePicker() async {
-    final XFile? pickedImage =
-        await _picker.pickImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
-      setState(() {
-        _image = File(pickedImage.path);
-      });
-    }
-  }
-
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController confirmpassController = TextEditingController();
-
-  @override
   Widget build(BuildContext context) {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    TextEditingController nameController = TextEditingController();
+    TextEditingController confirmpassController = TextEditingController();
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -65,31 +47,6 @@ class _SignupState extends State<Signup> {
         ),
         const SizedBox(
           height: 20,
-        ),
-        CircleAvatar(
-          radius: 75.0,
-
-          // child: ClipOval(
-          //     child: imageUrl != null
-          //         ? Image.file(
-          //             imageUrl!,
-          //           )
-          //         : Image.asset("assets/images/placeholder.png")),
-          child: ClipOval(
-              child: _image != null
-                  ? Image.file(_image)
-                  : Image.asset("assets/images/placeholder.jpg")),
-        ),
-        const SizedBox(height: 15),
-        GestureDetector(
-          child: const Text(
-            "Add profile picture",
-            style: TextStyle(
-                color: Colors.white, decoration: TextDecoration.underline),
-          ),
-          onTap: () {
-            _openImagePicker();
-          },
         ),
         const SizedBox(height: 15),
         Container(
@@ -135,8 +92,7 @@ class _SignupState extends State<Signup> {
                     const Text('Already have an account?'),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Login()));
+                        controller.navigateUser();
                       },
                       child: const Text('Login'),
                       style: ButtonStyle(

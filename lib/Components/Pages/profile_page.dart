@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_one_auction/Components/item_detail_page.dart';
-import 'package:gallery_one_auction/Reusable%20Components/auction_item.dart';
+import 'package:gallery_one_auction/Components/Pages/item_detail_page.dart';
+
+import '../Reusable Components/auction_item.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);

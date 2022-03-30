@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_one_auction/Components/auction_page.dart';
-import 'package:gallery_one_auction/Components/signup_page.dart';
+import 'package:gallery_one_auction/Components/Pages/auction_page.dart';
+import 'package:gallery_one_auction/Components/Pages/signup_page.dart';
 import 'package:gallery_one_auction/Theme/app_theme.dart';
 
 class Login extends StatefulWidget {

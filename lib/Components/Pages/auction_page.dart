@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:gallery_one_auction/Components/item_detail_page.dart';
-import 'package:gallery_one_auction/Reusable%20Components/auction_item.dart';
+import 'package:gallery_one_auction/Components/Pages/item_detail_page.dart';
+
+import '../Reusable Components/auction_item.dart';
 
 class Auction extends StatefulWidget {
   const Auction({Key? key}) : super(key: key);
