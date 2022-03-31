@@ -1,17 +1,10 @@
-import 'dart:ui';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_one_auction/Components/Pages/auction_page.dart';
-import 'package:gallery_one_auction/Components/Pages/login_page.dart';
-import 'dart:io';
 
 import 'package:gallery_one_auction/Theme/app_theme.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:get/get.dart';
 
-class Signup extends GetView {
+class Signup extends StatelessWidget {
   const Signup({Key? key}) : super(key: key);
 
   @override
@@ -23,108 +16,113 @@ class Signup extends GetView {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-        body: Container(
-      height: height,
-      width: width,
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/images/background.jpeg"),
-              fit: BoxFit.cover)),
-      child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-        const SizedBox(
-          height: 30,
-        ),
-        Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.all(10),
-          child: const Text("Gallery One",
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: "SourceSansPro",
-                fontWeight: FontWeight.w900,
-                fontSize: 60,
-              )),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        const SizedBox(height: 15),
-        Container(
-          height: height / 1.8,
-          width: width,
-          decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(30)),
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 50,
+        body: Stack(alignment: AlignmentDirectional.topStart, children: [
+      Container(
+        height: height / 2,
+        width: width,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/signup.png"),
+                fit: BoxFit.cover)),
+      ),
+      Container(
+        width: width,
+        height: height,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 40),
+                child: const Text(
+                  "Sign up",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontFamily: "SourceSansPro",
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF1E2944),
+                    fontSize: 40,
+                  ),
                 ),
-                userInput(nameController, "Name", TextInputType.name),
-                userInput(emailController, "Email", TextInputType.emailAddress),
-                userInput(passwordController, "Password",
-                    TextInputType.visiblePassword),
-                userInput(confirmpassController, "Confirm Password",
-                    TextInputType.visiblePassword),
-                SizedBox(
-                  height: 50,
-                  width: width,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Auction()));
-                      },
-                      child: const Text(
-                        'Signup',
-                        style: TextStyle(
-                            color: Colors.white, fontFamily: 'SourceSansPro'),
+              ),
+              Container(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      userInput(emailController, "Email",
+                          TextInputType.emailAddress, Icon(Icons.email)),
+                      userInput(passwordController, "Password",
+                          TextInputType.visiblePassword, Icon(Icons.password)),
+                      userInput(confirmpassController, "Confirm Password",
+                          TextInputType.visiblePassword, Icon(Icons.password)),
+                      Container(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        height: 40,
+                        width: double.infinity,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Auction()));
+                            },
+                            child: const Text(
+                              'Signup',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'SourceSansPro'),
+                            ),
+                            style: ButtonStyle(
+                              alignment: Alignment.center,
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  AppTheme.primaryColor),
+                            )),
                       ),
-                      style: ButtonStyle(
-                        alignment: Alignment.center,
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            AppTheme.primaryColor),
-                      )),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text('Already have an account?'),
-                    TextButton(
-                      onPressed: () {
-                        controller.navigateUser();
-                      },
-                      child: const Text('Login'),
-                      style: ButtonStyle(
-                          foregroundColor: MaterialStateProperty.all<Color>(
-                              AppTheme.lightBlue)),
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
-        )
-      ]),
-    ));
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          const Text('Already have an account?'),
+                          TextButton(
+                            onPressed: () {
+                              Get.toNamed("/login");
+                            },
+                            child: const Text('Login'),
+                            style: ButtonStyle(
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        AppTheme.primaryColor)),
+                          )
+                        ],
+                      )
+                    ]),
+              ),
+            ]),
+      )
+    ]));
   }
 
   Widget userInput(TextEditingController userInput, String hintTitle,
-      TextInputType keyboardType) {
+      TextInputType keyboardType, Icon icon) {
     return Container(
       margin: EdgeInsets.only(bottom: 15),
-      decoration: BoxDecoration(
-        color: Colors.white30,
-        border: Border.all(color: Color.fromARGB(255, 196, 193, 193)),
-        borderRadius: BorderRadius.circular(8),
-      ),
       child: Padding(
         padding: const EdgeInsets.only(left: 25.0, right: 25),
         child: TextField(
           controller: userInput,
           decoration: InputDecoration(
+            prefixIcon: Padding(
+              padding: const EdgeInsets.only(right: 30),
+              child: icon,
+            ),
             hintText: hintTitle,
             border: InputBorder.none,
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                style: BorderStyle.solid,
+                color: Color(0xFFACB1C1),
+              ),
+            ),
             hintStyle: TextStyle(fontSize: 15, color: Colors.grey),
           ),
           keyboardType: keyboardType,

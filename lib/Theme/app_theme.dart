@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class AppTheme {
   AppTheme._();
 
-  static const Color primaryColor = Color(0xFF515fd9);
+  static const Color primaryColor = Color(0xFF0124FB);
   static const Color lightBlue = Color(0xFF2596be);
 
-    static const String fontName = 'SourceSansPro';
-     static const TextTheme textTheme = TextTheme(
+  static const String fontName = 'SourceSansPro';
+  static const TextTheme textTheme = TextTheme(
     headline5: headline,
   );
 
@@ -18,5 +18,4 @@ class AppTheme {
     letterSpacing: 0.27,
     color: primaryColor,
   );
-
 }

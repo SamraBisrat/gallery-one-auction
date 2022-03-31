@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gallery_one_auction/Components/Pages/auction_page.dart';
 import 'package:gallery_one_auction/Components/Pages/signup_page.dart';
 import 'package:gallery_one_auction/Theme/app_theme.dart';
+import 'package:get/get.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -19,99 +20,115 @@ class _LoginState extends State<Login> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Container(
-        height: height,
+        body: Stack(alignment: AlignmentDirectional.topStart, children: [
+      Container(
+        height: height / 2,
         width: width,
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: NetworkImage(
-                    "https://images.unsplash.com/photo-1557683325-3ba8f0df79de?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1700&q=80"),
+                image: AssetImage("assets/images/login.png"),
                 fit: BoxFit.cover)),
-        child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-          Stack(
+      ),
+      Container(
+        width: width,
+        height: height,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: height / 1.8,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.only(left: 40),
+                child: const Text(
+                  "Login",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontFamily: "SourceSansPro",
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF1E2944),
+                    fontSize: 40,
+                  ),
                 ),
               ),
-              Padding(
-                  padding: const EdgeInsets.only(
-                    top: 50,
-                    left: 15,
-                    right: 15,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+              Container(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      userInput(
-                          emailController, 'Email', TextInputType.emailAddress),
-                      userInput(passwordController, 'Password',
-                          TextInputType.visiblePassword),
+                      userInput(emailController, "Email",
+                          TextInputType.emailAddress, Icon(Icons.email)),
+                      userInput(passwordController, "Password",
+                          TextInputType.visiblePassword, Icon(Icons.password)),
                       SizedBox(
-                        width: double.infinity,
-                        height: 50,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Login',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: AppTheme.primaryColor),
-                        ),
-                      ),
-                      const SizedBox(
                         height: 20,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          const Text('Dont have an account?'),
-                          TextButton(
+                      Container(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        height: 40,
+                        width: double.infinity,
+                        child: ElevatedButton(
                             onPressed: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Signup()));
+                                      builder: (context) => Auction()));
+                            },
+                            child: const Text(
+                              'Login',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'SourceSansPro'),
+                            ),
+                            style: ButtonStyle(
+                              alignment: Alignment.center,
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  AppTheme.primaryColor),
+                            )),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          const Text('Already have an account?'),
+                          TextButton(
+                            onPressed: () {
+                              Get.toNamed("/signup");
                             },
                             child: const Text('Signup'),
                             style: ButtonStyle(
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        AppTheme.lightBlue)),
+                                        AppTheme.primaryColor)),
                           )
                         ],
                       )
-                    ],
-                  ))
-            ],
-          ),
-        ]),
-      ),
-    );
+                    ]),
+              ),
+            ]),
+      )
+    ]));
   }
 
   Widget userInput(TextEditingController userInput, String hintTitle,
-      TextInputType keyboardType) {
+      TextInputType keyboardType, Icon icon) {
     return Container(
       margin: EdgeInsets.only(bottom: 15),
-      decoration: BoxDecoration(
-        color: Colors.white30,
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(8),
-      ),
       child: Padding(
         padding: const EdgeInsets.only(left: 25.0, right: 25),
         child: TextField(
           controller: userInput,
           decoration: InputDecoration(
+            prefixIcon: Padding(
+              padding: const EdgeInsets.only(right: 30),
+              child: icon,
+            ),
             hintText: hintTitle,
             border: InputBorder.none,
-            hintStyle: TextStyle(fontSize: 18, color: Colors.grey),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                style: BorderStyle.solid,
+                color: Color(0xFFACB1C1),
+              ),
+            ),
+            hintStyle: TextStyle(fontSize: 15, color: Colors.grey),
           ),
           keyboardType: keyboardType,
         ),
