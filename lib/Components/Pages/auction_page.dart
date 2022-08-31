@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gallery_one_auction/Components/Pages/item_detail_page.dart';
+import 'package:get/instance_manager.dart';
 
-import '../Reusable Components/auction_item.dart';
+import '../Widgets/auction_item.dart';
 
 class Auction extends StatefulWidget {
   const Auction({Key? key}) : super(key: key);
@@ -49,8 +50,8 @@ class _AuctionState extends State<Auction> {
               likes: true,
             ),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ItemDetail()));
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => ItemDetail()));
             },
           ),
           GestureDetector(

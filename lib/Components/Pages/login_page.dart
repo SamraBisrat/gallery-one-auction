@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:gallery_one_auction/Components/Controllers/auth_controller.dart';
 import 'package:gallery_one_auction/Components/Pages/auction_page.dart';
-import 'package:gallery_one_auction/Components/Pages/signup_page.dart';
 import 'package:gallery_one_auction/Theme/app_theme.dart';
 import 'package:get/get.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
-
-  @override
-  _LoginState createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
+class Login extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  Login({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    final AuthController authController =
+        Get.put(AuthController(), permanent: false);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -67,10 +64,7 @@ class _LoginState extends State<Login> {
                         width: double.infinity,
                         child: ElevatedButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Auction()));
+                              authController.navigateUser();
                             },
                             child: const Text(
                               'Login',
@@ -90,7 +84,7 @@ class _LoginState extends State<Login> {
                           const Text('Already have an account?'),
                           TextButton(
                             onPressed: () {
-                              Get.toNamed("/signup");
+                              authController.navigateUser();
                             },
                             child: const Text('Signup'),
                             style: ButtonStyle(

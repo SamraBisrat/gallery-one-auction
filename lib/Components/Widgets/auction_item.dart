@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gallery_one_auction/Theme/app_theme.dart';
 import 'package:getwidget/getwidget.dart';
 
 class AuctionItem extends StatefulWidget {
@@ -114,14 +115,14 @@ class _AuctionItemState extends State<AuctionItem> {
                 height: 10,
               ),
               FractionallySizedBox(
-                widthFactor: 1,
-                child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("Place a Bid"),
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color(0xFF515fd9)))),
-              )
+                  widthFactor: 1,
+                  child: ElevatedButton(
+                      onPressed: () {},
+                      child: Text("Place a Bid"),
+                      style: ButtonStyle(
+                          elevation: MaterialStateProperty.all(3),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              AppTheme.primaryColor)))),
             ]),
           )),
     );

@@ -10,8 +10,6 @@ class ProfileSetup extends StatefulWidget {
 class _ProfileSetupState extends State<ProfileSetup> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(Back),
-    );
+    return Container();
   }
 }

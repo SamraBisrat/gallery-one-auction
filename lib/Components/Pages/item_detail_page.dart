@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gallery_one_auction/Theme/app_theme.dart';
 
 class ItemDetail extends StatefulWidget {
   const ItemDetail({Key? key}) : super(key: key);
@@ -151,7 +152,7 @@ class _ItemDetailState extends State<ItemDetail> {
                                 style: ButtonStyle(
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(
-                                            const Color(0xFF515fd9)))),
+                                            AppTheme.primaryColor))),
                           )
                         ],
                       ),
